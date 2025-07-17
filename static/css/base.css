@@ -17,6 +17,7 @@
     box-sizing: border-box;
 
     font-family: "Noto Sans", sans-serif;
+    color: var(--text);
 }
 
 .serif {
@@ -25,7 +26,6 @@
 
 body {
     background-color: var(--background);
-    color: var(--text);
     line-height: 1.6;
     padding: 2rem 1rem;
     max-width: 60rem;
@@ -66,12 +66,12 @@ button {
     padding: 1rem 1.5rem;
     font-size: 1rem;
     background-color: #222;
-    color: white;
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 0.3rem;
     cursor: pointer;
+    transition: border 0.3s;
 }
 
 button:hover {
-    background-color: var(--lighter-background);
+    border: 1px solid var(--hover);
 }
