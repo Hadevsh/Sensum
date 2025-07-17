@@ -1,0 +1,69 @@
+/* Base Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    line-height: 1.6;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+/* Typography */
+h1, h2, h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* Form */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+/* Result container */
+#result {
+    margin-top: 30px;
+    background: #fafafa;
+    border-left: 4px solid #ccc;
+    padding: 15px;
+    font-size: 1.1rem;
+}
