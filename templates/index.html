@@ -5,7 +5,13 @@
 {% block content %}
 <h1>Sensum</h1>
 <p>What are your thoughts?</p>
-<div class="random-quote"></div>
+<div class="random-quote">
+    <div id="quote-box">
+        <p id="quote-text"></p>
+        <p id="quote-author"></p>
+        <!-- <p id="quote-categories"></p> -->
+    </div>
+</div>
 {% endblock %}
 
 {% block script %}<script src="{{ url_for('static', filename='js/index.js') }}"></script>{% endblock %}
