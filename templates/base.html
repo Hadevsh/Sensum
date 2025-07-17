@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Sensum{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/' + page + '.css') }}">
+    {% block style %}{% endblock %}
 </head>
 <body>
     <nav>
@@ -15,6 +15,7 @@
         {% block content %}{% endblock %}
     </div>
 
-    <script src="{{ url_for('static', filename='js/' + page + '.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block script %}{% endblock %}
 </body>
 </html>
