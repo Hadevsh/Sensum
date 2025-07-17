@@ -19,3 +19,9 @@ textarea {
 textarea:focus {
     border: 1px solid var(--hover);
 }
+
+#analyze-input {
+    width: 100%;
+    height: 3rem;
+    padding: 0;
+}
