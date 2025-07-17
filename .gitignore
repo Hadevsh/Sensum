@@ -1,0 +1,18 @@
+# Python virtual environment
+venv/
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints
+
+# VSCode settings (if using)
+.vscode/
+
+# MacOS junk
+.DS_Store
