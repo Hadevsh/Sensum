@@ -16,3 +16,6 @@ __pycache__/
 
 # MacOS junk
 .DS_Store
+
+# Data
+static/csv/
