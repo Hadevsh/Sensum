@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+from transformers import pipeline
 
 csv_path = "static/csv/quotes.csv"
 df = pd.read_csv(csv_path)
@@ -46,3 +47,14 @@ def get_random_quote():
         "author": author,
         "categories": categories
     }
+
+# ----- Text Classification
+
+# Load model once
+classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+def classify_text(text, candidate_labels, top_k=5):
+    result = classifier(text, candidate_labels, multi_label=True)
+    # Zip scores and labels, then get top_k
+    labels_scores = list(zip(result['labels'], result['scores']))
+    top = sorted(labels_scores, key=lambda x: x[1], reverse=True)[:top_k]
+    return [label for label, score in top]
