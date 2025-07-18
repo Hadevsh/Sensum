@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify
-from utils.model import get_random_quote, get_unique_categories, classify_text
+from utils.model import get_random_quote, get_top_categories, classify_text
 
 app = Flask(__name__)
 
 # Preload all categories
-CATEGORIES = get_unique_categories()
+CATEGORIES = get_top_categories(top_n=100)
 
 @app.route('/')
 def index():
@@ -15,7 +15,7 @@ def random_quote():
     quote_data = get_random_quote()
     return jsonify(quote_data)
 
-@app.route('api/classify', methods=['POST'])
+@app.route('/api/classify', methods=['POST'])
 def classify():
     data = request.get_json()
     input_text = data.get("text", "")
@@ -27,6 +27,9 @@ def classify():
     return jsonify({"categories": categories})
 
 if __name__ == '__main__':
-    print(f"\n\nFound {len(CATEGORIES)} unique categories\n\n")
+    print(f"\n\n{len(CATEGORIES)} top n categories\n")
+    print(CATEGORIES, "\n\n")
+
+    # categories = classify_text("I am very happy", CATEGORIES, top_k=5)
 
     app.run(debug=True)

@@ -4,8 +4,38 @@ function loadQuote() {
     .then(data => {
         document.getElementById('quote-text').innerText = `"${data.quote}"`;
         document.getElementById('quote-author').innerText = `— ${data.author}`;
-        document.getElementById('quote-categories').innerText = 
-        data.categories.length ? `Categories: ${data.categories.join(', ')}` : '';
+        // document.getElementById('quote-categories').innerText = 
+        // data.categories.length ? `Categories: ${data.categories.join(', ')}` : '';
+    });
+}
+
+function classifyUserText() {
+    const text = document.getElementById("user-input").value;
+
+    // if (!text.trim()) {
+    //     alert("Please enter something.");
+    //     return;
+    // }
+
+    fetch('/api/classify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            document.getElementById("classified-result").innerText = data.error;
+        } else {
+            document.getElementById("classified-result").innerHTML = `
+            <h3>Top Categories:</h3>
+            <ul>${data.categories.map(cat => `<li>${cat}</li>`).join('')}</ul>
+            `;
+        }
+    })
+    .catch(err => {
+        console.error("Classification error:", err);
+        document.getElementById("classified-result").innerText = "Error occurred.";
     });
 }
 

@@ -5,7 +5,8 @@
 {% block content %}
 <h1>Sensum</h1>
 <textarea id="user-input" rows="5" placeholder="What's on your mind?"></textarea>
-<button id="analyze-input">Submit</button>
+<button id="analyze-input" onclick="classifyUserText()">Submit</button>
+<div id="classified-result"></div>
 <div class="random-quote">
     <h2>Random quote</h2>
     <div id="quote-box">
