@@ -1,6 +1,6 @@
 import pandas as pd
-import random
 from transformers import pipeline
+from collections import Counter
 
 csv_path = "static/csv/quotes.csv"
 df = pd.read_csv(csv_path)
@@ -22,6 +22,21 @@ def get_unique_categories():
                     all_cats.add(cleaned)
 
     return sorted(all_cats)
+
+# Get top n most frequent categories
+def get_top_categories(top_n: int = 100):
+    global df
+
+    df = pd.read_csv(csv_path)
+    counter = Counter()
+
+    for entry in df['category'].dropna():
+        for cat in str(entry).replace('/', ',').split(','):
+            cleaned = cat.strip().lower()
+            if cleaned:
+                counter[cleaned] += 1
+
+    return [cat for cat, _ in counter.most_common(top_n)]
 
 def get_random_quote():
     global df
