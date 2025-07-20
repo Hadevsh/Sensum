@@ -3,10 +3,20 @@
 {% block style %}<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">{% endblock %}
 
 {% block content %}
-<h1>Sensum</h1>
+<div class="title">
+    <h1>Sensum</h1>
+</div>
 <textarea id="user-input" rows="5" placeholder="What's on your mind?"></textarea>
 <button id="analyze-input" onclick="classifyUserText()">Submit</button>
-<div id="classified-result"></div>
+<div class="analysis-result">
+    <h2>Your quote</h2>
+    <div id="classified-result"></div>
+    <div id="progress-message" style="display: none; margin-top: 0.5rem;">
+        <em>Analyzing your thoughts... Please wait.</em>
+    </div>
+</div>
+</div>
+
 <div class="random-quote">
     <h2>Random quote</h2>
     <div id="quote-box">
