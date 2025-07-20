@@ -11,7 +11,6 @@ function loadQuote() {
 
 function classifyUserText() {
     const text = document.getElementById("user-input").value;
-    const progressMsg = document.getElementById("progress-message");
     const resultBox = document.getElementById("classified-result");
 
     // if (!text.trim()) {
@@ -20,8 +19,7 @@ function classifyUserText() {
     // }
 
     // Show loading message
-    progressMsg.style.display = 'block';
-    resultBox.innerHTML = '';
+    resultBox.innerHTML = 'Analyzing your thoughts...';
 
     fetch('/api/classify', {
         method: 'POST',
@@ -30,7 +28,6 @@ function classifyUserText() {
     })
     .then(res => res.json())
     .then(data => {
-        progressMsg.style.display = 'none';
         if (data.error) {
             document.getElementById("classified-result").innerText = data.error;
         } else {
