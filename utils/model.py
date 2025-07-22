@@ -1,6 +1,7 @@
 import pandas as pd
 from transformers import pipeline
 from collections import Counter
+import random
 
 csv_path = "static/csv/quotes.csv"
 QUOTES_DF = pd.read_csv(csv_path).dropna(subset=["quote", "author", "category"])
@@ -50,7 +51,7 @@ def get_random_quote():
         "categories": categories
     }
 
-# ----- Text Classification
+# Text Classification
 # Load model once
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 def classify_text(text, candidate_labels, top_k=5):
@@ -59,3 +60,20 @@ def classify_text(text, candidate_labels, top_k=5):
     labels_scores = list(zip(result['labels'], result['scores']))
     top = sorted(labels_scores, key=lambda x: x[1], reverse=True)[:top_k]
     return [label for label, score in top]
+
+def get_matching_quote(categories):
+    matches = []
+    for _, row in QUOTES_DF.iterrows():
+        raw_cats = str(row['category']).lower()
+        row_cats = [cat.strip() for cat in raw_cats.replace('/', ',').split(',') if cat.strip()]
+        if any(cat in row_cats for cat in categories):
+            matches.append({
+                "quote": row['quote'].strip(),
+                "author": row['author'].strip(),
+                "categories": row_cats
+            })
+
+    if matches:
+        return random.choice(matches)
+    else:
+        return None
