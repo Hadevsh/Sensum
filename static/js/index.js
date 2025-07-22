@@ -32,8 +32,8 @@ function classifyUserText() {
             document.getElementById("classified-result").innerText = data.error;
         } else {
             document.getElementById("classified-result").innerHTML = `
-            <h3>Top Categories:</h3>
-            <ul>${data.categories.map(cat => `<li>${cat}</li>`).join('')}</ul>
+            <p id="quote-text" class="serif">"${data.quote}"</p>
+            <p id="quote-author">— ${data.author}</p>
             `;
         }
     })

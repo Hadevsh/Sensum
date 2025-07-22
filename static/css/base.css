@@ -75,3 +75,13 @@ button {
 button:hover {
     border: 1px solid var(--hover);
 }
+
+::-moz-selection {  /* Code for Firefox */
+    color: var(--background);
+    background: var(--hover);
+}
+
+::selection {
+    color: var(--background);
+    background: var(--hover);
+}

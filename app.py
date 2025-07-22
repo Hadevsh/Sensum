@@ -27,6 +27,7 @@ def classify():
     print(f"[INFO] Top categories: {top_categories}")
 
     quote_data = get_matching_quote(top_categories)
+    print(f"[INFO] Quote categories: {quote_data.get("categories")}")
     
     if not quote_data:
         return jsonify({"error": "No quote found matching those categories."}), 404
@@ -34,9 +35,7 @@ def classify():
     return jsonify(quote_data)
 
 if __name__ == '__main__':
-    print(f"\n\n{len(CATEGORIES)} top n categories\n")
-    print(CATEGORIES, "\n\n")
-
-    # categories = classify_text("I am very happy", CATEGORIES, top_k=5)
+    # print(f"\n\n{len(CATEGORIES)} top n categories\n")
+    # print(CATEGORIES, "\n\n")
 
     app.run(debug=True)
