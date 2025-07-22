@@ -10,6 +10,10 @@ CATEGORIES = get_top_categories(top_n=100)
 def index():
     return render_template('index.html', page='home')
 
+@app.route('/saved')
+def saved():
+    return render_template('saved.html', page='saved')
+
 @app.route('/api/random-quote')
 def random_quote():
     quote_data = get_random_quote()

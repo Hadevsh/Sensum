@@ -53,6 +53,7 @@ def get_random_quote():
 
 # Text Classification
 # Load model once
+# TODO: Add selection of the model as well as estimated analyze time
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 def classify_text(text, candidate_labels, top_k=5):
     result = classifier(text, candidate_labels, multi_label=True)

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Home | Sensum{% endblock %}
+{% block style %}<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">{% endblock %}
+
+{% block content %}
+<div class="title">
+    <h1>Saved Quotes | Sensum</h1>
+</div>
+{% endblock %}
+
+{% block script %}<script src="{{ url_for('static', filename='js/index.js') }}"></script>{% endblock %}
