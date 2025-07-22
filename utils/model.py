@@ -3,17 +3,12 @@ from transformers import pipeline
 from collections import Counter
 
 csv_path = "static/csv/quotes.csv"
-df = pd.read_csv(csv_path)
+QUOTES_DF = pd.read_csv(csv_path).dropna(subset=["quote", "author", "category"])
 
 def get_unique_categories():
-    global df
-
-    # Drop rows with missing or empty categories
-    df = df.dropna(subset=['category'])
-
     # Handle multiple categories per quote (comma-separated or slashes?)
     all_cats = set()
-    for entry in df['category']:
+    for entry in QUOTES_DF['category']:
         if isinstance(entry, str):
             # split by comma or slash
             for cat in entry.replace('/', ',').split(','):
@@ -25,12 +20,9 @@ def get_unique_categories():
 
 # Get top n most frequent categories
 def get_top_categories(top_n: int = 100):
-    global df
-
-    df = pd.read_csv(csv_path)
     counter = Counter()
 
-    for entry in df['category'].dropna():
+    for entry in QUOTES_DF['category'].dropna():
         for cat in str(entry).replace('/', ',').split(','):
             cleaned = cat.strip().lower()
             if cleaned:
@@ -39,13 +31,8 @@ def get_top_categories(top_n: int = 100):
     return [cat for cat, _ in counter.most_common(top_n)]
 
 def get_random_quote():
-    global df
-
-    # Drop rows with missing quote or author
-    df = df.dropna(subset=['quote', 'author'])
-
     # Randomly choose one row
-    random_row = df.sample(n = 1).iloc[0]
+    random_row = QUOTES_DF.sample(n = 1).iloc[0]
 
     quote_text = random_row['quote'].strip()
     author = random_row['author'].strip()
@@ -64,7 +51,6 @@ def get_random_quote():
     }
 
 # ----- Text Classification
-
 # Load model once
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 def classify_text(text, candidate_labels, top_k=5):
