@@ -43,3 +43,12 @@ if __name__ == '__main__':
     # print(CATEGORIES, "\n\n")
 
     app.run(debug=True)
+
+"""
+Future Improvements
+- Speed boost: replace zero-shot with semantic filtering or custom classifier
+- Quote search by mood or keyword
+- User history or insights
+- Daily inspirational quote mode
+- Deploy to Hugging Face Spaces / Render / Vercel
+"""
