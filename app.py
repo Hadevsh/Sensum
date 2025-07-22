@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from utils.model import get_random_quote, get_top_categories, classify_text
+from utils.model import get_random_quote, get_top_categories, classify_text, get_matching_quote
 
 app = Flask(__name__)
 
@@ -18,13 +18,20 @@ def random_quote():
 @app.route('/api/classify', methods=['POST'])
 def classify():
     data = request.get_json()
-    input_text = data.get("text", "")
+    input_text = data.get("text", "").strip()
 
     if not input_text.strip():
         return jsonify({"error": "No input text provided."}), 400
 
-    categories = classify_text(input_text, CATEGORIES, top_k=5)
-    return jsonify({"categories": categories})
+    top_categories = classify_text(input_text, CATEGORIES, top_k=5)
+    print(f"[INFO] Top categories: {top_categories}")
+
+    quote_data = get_matching_quote(top_categories)
+    
+    if not quote_data:
+        return jsonify({"error": "No quote found matching those categories."}), 404
+
+    return jsonify(quote_data)
 
 if __name__ == '__main__':
     print(f"\n\n{len(CATEGORIES)} top n categories\n")
